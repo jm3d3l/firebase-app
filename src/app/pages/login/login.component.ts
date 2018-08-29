@@ -11,9 +11,4 @@ export class LoginComponent {
 
   constructor(private auth: FirebaseService, private router: Router, private route: ActivatedRoute) { }
 
-  login() {
-   let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-   localStorage.setItem('returnUrl' ,returnUrl);
-    this.auth.login();
-  }
 }

@@ -13,6 +13,11 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { FirebaseService } from './services/firebase-service.service';
 import { AuthGuard } from './auth-guard/auth.guard';
+import { AdminGuard } from './admin-guard/admin.guard';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { PromptComponent } from './modal/prompt/prompt.component';
+import { BsModalService, ModalBackdropComponent } from 'ngx-bootstrap';
+import { ModalContainerComponent } from 'ngx-bootstrap/modal';
 
 const routes: Routes = [
   {
@@ -47,22 +52,32 @@ const routes: Routes = [
     component: MyOrderComponent,
     canActivate: [AuthGuard]
   },
-
+  {
+    path: 'admin/products/new',
+    component: ProductFormComponent,
+    canActivate: [AuthGuard, AdminGuard]
+  },
+  {
+    path: 'admin/products/:id',
+    component: ProductFormComponent,
+    canActivate: [AuthGuard, AdminGuard]
+  },
   {
     path: 'admin/products',
     component: AdminProductsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, AdminGuard]
   },
   {
     path: 'admin/orders',
     component: AdminOrdersComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, AdminGuard]
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
+
 })
 export class AppRoutingModule { }
 
@@ -78,11 +93,23 @@ OrderSuccessComponent,
 MyOrderComponent,
 LoginComponent,
 AdminProductsComponent,
-AdminOrdersComponent
+AdminOrdersComponent,
+ProductFormComponent,
+ModalBackdropComponent,
+ModalContainerComponent,
+PromptComponent
 ];
 
 export const AppProvider: any = [
   FirebaseService,
-  AuthGuard
+  BsModalService,
+  AuthGuard,
+  AdminGuard
+];
+
+export const AppEntry: any = [
+  ModalBackdropComponent,
+  ModalContainerComponent,
+  PromptComponent
 ];
 

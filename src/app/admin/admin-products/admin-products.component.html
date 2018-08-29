@@ -1,3 +1,43 @@
 <p>
-  admin-products works!
+  <a routerLink="/admin/products/new" class="btn btn-primary">New Item</a>
 </p>
+<div class="table-responsive">
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th>Product Name</th>
+        <th>Product Image</th>
+        <th>Price</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of productSrv.globalData | async">
+        <td class="align-middle">{{p.title}}</td>
+        <td class="align-middle">
+          <img style="height: 60px;" [src]="p.imgurl">
+        </td>
+        <td class="align-middle">{{p.price | currency:'&#8369;'}}</td>
+        <td class="align-middle">
+          <a class="nav-link" [routerLink]="['/admin/products/', p.key]">edit</a>
+        </td>
+        <td class="align-middle">
+            <i (click)="delete(p, template)" class="fas fa-trash-alt"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-template #template>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">First modal</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        This is a first modal
+        <button type="button" class="btn btn-primary" (click)="openModal2(templateNested)">Open second modal</button>
+      </div>
+    </ng-template>
+</div>

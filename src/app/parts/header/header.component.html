@@ -11,18 +11,21 @@
       </li>
       <ng-template #unkwownUser>
         <li class="nav-item active">
-           <a class="nav-link" (click)="auth.login()">Login <span class="sr-only">(current)</span></a>
+           <a class="nav-link" (click)="login()">Login <span class="sr-only">(current)</span></a>
       </li>
       </ng-template>      
     
-      <li class="nav-item dropdown" dropdown *ngIf="auth.user$ | async as user; else unkwownUser">
+      <li class="nav-item dropdown" dropdown *ngIf="appUser ; else unkwownUser">
         <a class="nav-link dropdown-toggle" id="navbarDropdown" dropdownToggle role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{ user.displayName }}
+          {{ appUser.name }}
         </a>
         <div class="dropdown-menu" *dropdownMenu aria-labelledby="navbarDropdown">
           <a class="dropdown-item" routerLink="/my-orders">My Orders</a>
-          <a class="dropdown-item" routerLink="/admin/orders">Manage Orders</a>
-          <a class="dropdown-item" routerLink="/admin/products">Manage Products</a>
+          <ng-container *ngIf="appUser.isAdmin">
+            <a class="dropdown-item" routerLink="/admin/orders">Manage Orders</a>
+           <a class="dropdown-item" routerLink="/admin/products">Manage Products</a>
+          </ng-container>
+          
           <a class="dropdown-item logging-out" (click)="logout()">Log Out</a>
         </div>
       </li>
