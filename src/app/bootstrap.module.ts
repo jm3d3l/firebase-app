@@ -4,9 +4,10 @@ import {BsDropdownModule } from 'ngx-bootstrap';
 imports: [
 BsDropdownModule.forRoot(),
 
+
 ],
 exports: [
-BsDropdownModule
+BsDropdownModule,
 
 ]
 })

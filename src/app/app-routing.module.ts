@@ -17,7 +17,8 @@ import { AdminGuard } from './admin-guard/admin.guard';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { PromptComponent } from './modal/prompt/prompt.component';
 import { BsModalService, ModalBackdropComponent } from 'ngx-bootstrap';
-import { ModalContainerComponent } from 'ngx-bootstrap/modal';
+import { ModalContainerComponent, ModalModule } from 'ngx-bootstrap/modal';
+import { BootstrapModule } from './bootstrap.module';
 
 const routes: Routes = [
   {
@@ -75,8 +76,17 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  imports: [
+    RouterModule.forRoot(routes),
+    BootstrapModule,
+  ],
+  exports: [
+    RouterModule,
+    BootstrapModule],
+    entryComponents: [
+      ModalBackdropComponent,
+      ModalContainerComponent
+  ]
 
 })
 export class AppRoutingModule { }
@@ -105,11 +115,5 @@ export const AppProvider: any = [
   BsModalService,
   AuthGuard,
   AdminGuard
-];
-
-export const AppEntry: any = [
-  ModalBackdropComponent,
-  ModalContainerComponent,
-  PromptComponent
 ];
 

@@ -1,7 +1,68 @@
 <p>
   <a routerLink="/admin/products/new" class="btn btn-primary">New Item</a>
-</p>
-<div class="table-responsive">
+</p><div class="input-group-prepend">
+    <!-- <span class="input-group-text"><i class="fas fa-search"></i></span> -->
+     <input
+  #query
+  (keyup) ="search(query.value)"
+  type="text" class="form-control mb-1" placeholder="Search...">
+  </div>
+
+  <ngx-datatable
+      class="material"
+      [columnMode]="'force'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="auto"
+      [rows]="queryProduct"
+      [selected]="selected"
+      [selectionType]="'single'"
+      (select)='onSelect($event)'>
+          <ngx-datatable-column
+          name="Title"
+          [width]="300"
+          [frozenLeft]="true">
+        </ngx-datatable-column>
+        <ngx-datatable-column
+          name="price">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{value | currency:'&#8369;'}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="imgurl">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              <img [src]="value" height="50px">
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <a class="nav-link" [routerLink]="['/admin/products/', row.key]">edit</a>
+            <p>{{value}}</p>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <i (click)="delete(p, template)" class="fas fa-trash-alt"></i>
+          </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+    <ng-template #template>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Delete this product?</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+          <img [src]="selectedProduct.imgurl" height="100px">
+          <h5>{{selectedProduct.title}}</h5>
+        <button type="button" class="btn btn-danger" (click)="deleteItem()" >Yes</button>
+        <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+      </div>
+    </ng-template>
+<!-- <div class="table-responsive">
+  
+ 
   <table class="table">
     <thead class="thead-light">
       <tr>
@@ -13,7 +74,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let p of productSrv.globalData | async">
+      <tr *ngFor="let p of queryProduct">
         <td class="align-middle">{{p.title}}</td>
         <td class="align-middle">
           <img style="height: 60px;" [src]="p.imgurl">
@@ -28,16 +89,5 @@
       </tr>
     </tbody>
   </table>
-  <ng-template #template>
-      <div class="modal-header">
-        <h4 class="modal-title pull-left">First modal</h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        This is a first modal
-        <button type="button" class="btn btn-primary" (click)="openModal2(templateNested)">Open second modal</button>
-      </div>
-    </ng-template>
-</div>
+  
+</div> -->
