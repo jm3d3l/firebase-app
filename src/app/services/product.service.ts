@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProductService {
-  globalData;
+  globalData: Observable<any[]>;
   constructor(public db: AngularFireDatabase) {
     const prodid = this.getAll();
     this.globalData  = prodid.snapshotChanges().pipe(map(changes => {
@@ -16,9 +16,6 @@ export class ProductService {
        }));
     }));
    }
-  getProducts() {
-    return this.db.list('categories', data => data.orderByChild('name')).valueChanges();
-  }
 
   saveProduct(product) {
    return this.db.list('/products').push(product);

@@ -8,6 +8,7 @@ import { UserModel } from '../../models/user-model';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  isCollapsed = false;
  appUser: UserModel;
   constructor(
     private auth: FirebaseService,

@@ -4,7 +4,8 @@ import * as firebase from 'firebase';
 import { Observable , of } from 'rxjs';
 import { UserModel } from '../models/user-model';
 import { UserService } from './user.service';
-import { switchMap , } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 @Injectable({
   providedIn: 'root',
 })
@@ -14,6 +15,7 @@ user$: Observable<firebase.User>;
 
   constructor(
     public afAuth: AngularFireAuth,
+    private afdb: AngularFireDatabase,
     public userSrv: UserService) {
     this.user$ = this.afAuth.authState;
    }
@@ -34,4 +36,6 @@ get appUser$(): Observable<UserModel>  {
     }
   }));
  }
+
+
 }

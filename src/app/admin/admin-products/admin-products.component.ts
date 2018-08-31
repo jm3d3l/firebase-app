@@ -1,19 +1,19 @@
-import { Component, OnInit, TemplateRef, OnDestroy  } from '@angular/core';
+import { Component, OnInit, TemplateRef, OnDestroy, Output  } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { AngularFireList } from 'angularfire2/database';
-import { UserService } from '../../services/user.service';
 import { BsModalService } from 'ngx-bootstrap';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { PromptComponent } from '../../modal/prompt/prompt.component';
 import { Product } from '../../models/product.model';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.scss']
 })
-export class AdminProductsComponent implements OnInit, OnDestroy {
+export class AdminProductsComponent implements OnDestroy {
+  @Output('url') url: string;
   prodId = {};
   products: Product[];
   queryProduct: any[];
@@ -24,10 +24,10 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   subcription: Subscription;
   constructor(
     private productSrv: ProductService,
-    private userSrv: UserService,
-    private modal: BsModalService
+    private modal: BsModalService,
    ) {
     this.subcription = this.productSrv.globalData.subscribe(p => this.queryProduct = this.products = p);
+
    }
    search(query: string) {
       this.queryProduct = (query) ? this.products.filter( p =>
@@ -57,8 +57,6 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
    ngOnDestroy() {
      this.subcription.unsubscribe();
    }
-  ngOnInit() {
 
-  }
 
 }

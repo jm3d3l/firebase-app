@@ -1,0 +1,14 @@
+.card {
+    margin-bottom: 30px;
+    border-radius: 0;
+    &:hover{
+        transition: 500ms ease;
+        box-shadow: 2px 3px 11px 0px #d4c1c1;
+    }
+    .card-footer {
+        padding: 0
+    }
+    .btn.add-to-cart {
+        border-radius: 0;
+    }
+}

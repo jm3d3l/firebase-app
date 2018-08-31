@@ -19,6 +19,9 @@ import { PromptComponent } from './modal/prompt/prompt.component';
 import { BsModalService, ModalBackdropComponent } from 'ngx-bootstrap';
 import { ModalContainerComponent, ModalModule } from 'ngx-bootstrap/modal';
 import { BootstrapModule } from './bootstrap.module';
+import { CategoryService } from './services/category.service';
+import { ProductFilterComponent } from './pages/product/product-filter/product-filter.component';
+import { ProductCardComponent } from './pages/product-card/product-card.component';
 
 const routes: Routes = [
   {
@@ -82,35 +85,40 @@ const routes: Routes = [
   ],
   exports: [
     RouterModule,
-    BootstrapModule],
-    entryComponents: [
-      ModalBackdropComponent,
-      ModalContainerComponent
-  ]
+    BootstrapModule
+  ],
+  entryComponents: [
+    ModalBackdropComponent,
+    ModalContainerComponent
+],
+
 
 })
 export class AppRoutingModule { }
 
 
 export const AppDeclaration: any = [
-AppComponent,
-HeaderComponent,
-ShoppingCartComponent,
-HomeComponent,
-ProductComponent,
-CheckoutComponent,
-OrderSuccessComponent,
-MyOrderComponent,
-LoginComponent,
-AdminProductsComponent,
-AdminOrdersComponent,
-ProductFormComponent,
-ModalBackdropComponent,
-ModalContainerComponent,
-PromptComponent
+  AppComponent,
+  HeaderComponent,
+  ShoppingCartComponent,
+  HomeComponent,
+  ProductComponent,
+  CheckoutComponent,
+  OrderSuccessComponent,
+  MyOrderComponent,
+  LoginComponent,
+  AdminProductsComponent,
+  AdminOrdersComponent,
+  ProductFormComponent,
+  ModalBackdropComponent,
+  ModalContainerComponent,
+  PromptComponent,
+  ProductFilterComponent,
+  ProductCardComponent
 ];
 
 export const AppProvider: any = [
+  CategoryService,
   FirebaseService,
   BsModalService,
   AuthGuard,

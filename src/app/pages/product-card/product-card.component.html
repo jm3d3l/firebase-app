@@ -1,0 +1,13 @@
+<div *ngIf="product.title || product.imgurl" class="card" style="width: 15rem;">
+    <img *ngIf="product.imgurl" class="card-img-top" [src]="product.imgurl" alt="{{product.title}}">
+    <div class="card-body">
+      <h5 class="card-title">{{product.title}}</h5>
+      <p class="card-text">{{product.price | currency:'&#8369;'}}</p>
+    </div>
+    <div class="card-footer">
+        <button
+          (click)="addToCart(product)"
+         *ngIf="showActions" 
+         class="btn btn-primary btn-block add-to-cart">Add to Chart <i class="fas fa-cart-plus"></i></button>
+    </div>
+  </div>

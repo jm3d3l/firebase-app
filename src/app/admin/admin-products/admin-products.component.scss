@@ -6,7 +6,6 @@
         transition: .5s ease-in-out;
     }
 }
-.ngx-datatable.material.single-selection .datatable-body-row.active, .ngx-datatable.material.single-selection .datatable-body-row.active .datatable-row-group, .ngx-datatable.material.multi-selection .datatable-body-row.active, .ngx-datatable.material.multi-selection .datatable-body-row.active .datatable-row-group, .ngx-datatable.material.multi-click-selection .datatable-body-row.active, .ngx-datatable.material.multi-click-selection .datatable-body-row.active .datatable-row-group {
-    background-color: rgb(174, 179, 211);
-    color: #FFF;
+img.imgDelete {
+    box-shadow: 3px 5px 7px 0px #cfbdbd;
 }
