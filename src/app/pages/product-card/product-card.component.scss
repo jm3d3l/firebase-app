@@ -1,14 +1,57 @@
-.card {
+
+
+  .card {
     margin-bottom: 30px;
     border-radius: 0;
-    &:hover{
-        transition: 500ms ease;
-        box-shadow: 2px 3px 11px 0px #d4c1c1;
+
+    .btn {
+      border-radius: 0;
     }
+
+    &:hover {
+      transition: 500ms ease;
+      box-shadow: 2px 3px 11px 0px #d4c1c1;
+    }
+
+    .card-img-top {
+      border-bottom: solid 2px #d9c4c4;
+    }
+
+    .card-body {
+      padding: 10px 15px 0 15px;
+
+      .credits {
+        display: flex;
+        justify-content: center;
+
+        b {
+          font-size: 12px;
+        }
+
+        small {
+          text-align: center;
+          font-size: 14px;
+        }
+      }
+    }
+
     .card-footer {
-        padding: 0
+      padding: 0;
+
+      .quantity {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .btn-hover:hover {
+        background: #d3c6c6;
+        color: #fbfdff;
+        transition: 200ms ease;
+        text-shadow:  -1px 2px 1px grey;
+      }
     }
+
     .btn.add-to-cart {
-        border-radius: 0;
+      border-radius: 0;
     }
-}
+  }

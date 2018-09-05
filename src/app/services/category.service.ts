@@ -9,17 +9,15 @@ import { FirebaseService } from './firebase-service.service';
 })
 export class CategoryService {
 
-  globalCategories: Observable<any>;
+  globalCategories;
   constructor( private afd: AngularFireDatabase, private fireSrv: FirebaseService) {
-   this.globalCategories = this.getAll().snapshotChanges().pipe(map(c => {
-      return c.map((change => ({
-        key: change.payload.key, ...change.payload.val()
-       })));
-    }));
+
+    this.globalCategories = this.fireSrv.objectKey(this.getAll());
+
    }
 
   getAll() {
-    return this.afd.list('categories', data => data.orderByChild('name'));
+    return this.fireSrv.fetchChild('categories', 'name');
   }
 
 

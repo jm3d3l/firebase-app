@@ -4,8 +4,8 @@ import * as firebase from 'firebase';
 import { Observable , of } from 'rxjs';
 import { UserModel } from '../models/user-model';
 import { UserService } from './user.service';
-import { switchMap } from 'rxjs/operators';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
+import { switchMap, map } from 'rxjs/operators';
+import { AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 @Injectable({
   providedIn: 'root',
 })
@@ -20,12 +20,12 @@ user$: Observable<firebase.User>;
     this.user$ = this.afAuth.authState;
    }
 
-login(): void {
-  this.afAuth.auth.signInWithRedirect( new firebase.auth.GoogleAuthProvider());
-}
-logout(): void {
-  this.afAuth.auth.signOut();
-}
+  login(): void {
+    this.afAuth.auth.signInWithRedirect( new firebase.auth.GoogleAuthProvider());
+  }
+  logout(): void {
+    this.afAuth.auth.signOut();
+  }
 
 get appUser$(): Observable<UserModel>  {
   return this.user$.pipe(switchMap(user => {
@@ -37,5 +37,16 @@ get appUser$(): Observable<UserModel>  {
   }));
  }
 
+ objectKey(valuekey: AngularFireList<{}>): Observable<any> {
+  return  valuekey.snapshotChanges().pipe(map( changes => {
+      return changes.map((c => ({
+        key: c.payload.key, ...c.payload.val()
+      })));
+    }));
+ }
+
+ fetchChild(name: any, childName: any): AngularFireList<any> {
+   return this.afdb.list(name, data => data.orderByChild(childName));
+ }
 
 }

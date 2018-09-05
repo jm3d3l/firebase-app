@@ -33,7 +33,7 @@ export class AdminProductsComponent implements OnDestroy {
       this.queryProduct = (query) ? this.products.filter( p =>
       p.title.toLowerCase().includes(query.toLowerCase())) : this.products;
    }
-   delete(e: any = {}, temp: TemplateRef<any>) {
+   delete(temp: TemplateRef<any>) {
     const config = {
       backdrop: true,
       ignoreBackdropClick: true

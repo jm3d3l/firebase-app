@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FirebaseService } from '../../services/firebase-service.service';
 import { UserModel } from '../../models/user-model';
+import { LocalStorageService } from 'ngx-webstorage';
+import { ShoppingCartService } from '../../services/shopping-cart.service';
+import { ShoppingCart } from '../../models/shoppingCart';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -9,23 +14,29 @@ import { UserModel } from '../../models/user-model';
 })
 export class HeaderComponent implements OnInit {
   isCollapsed = false;
- appUser: UserModel;
+  appUser: UserModel;
+  cartCount: number;
+  cart$;
   constructor(
     private auth: FirebaseService,
-     private router: Router,
-     private route: ActivatedRoute) {
-      this.auth.appUser$.subscribe( user => this.appUser = user);
-   }
-
-  ngOnInit() {
+    public router: Router,
+    private route: ActivatedRoute,
+    private storage: LocalStorageService,
+    private cartSrv: ShoppingCartService) {
   }
+
   login() {
     const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-    localStorage.setItem('returnUrl' , returnUrl);
-     this.auth.login();
-   }
+    this.storage.store('returnUrl', returnUrl);
+    this.auth.login();
+  }
   logout() {
-        this.auth.logout();
-        this.router.navigate(['/']);
+    this.auth.logout();
+    this.router.navigate(['/']);
+  }
+
+  async ngOnInit() {
+    this.auth.appUser$.subscribe(user => this.appUser = user);
+    this.cart$ = await this.cartSrv.getCart();
   }
 }

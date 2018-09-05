@@ -1,0 +1,17 @@
+.quantity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  border-radius: 0;
+}
+
+.btn-hover:hover {
+  background: #d3c6c6;
+  color: #fbfdff;
+  transition: 200ms ease;
+  text-shadow: -1px 2px 1px grey;
+  border-radius: 0;
+}

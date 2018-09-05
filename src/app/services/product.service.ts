@@ -3,18 +3,14 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angular
 import {Product} from '../models/product.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { FirebaseService } from './firebase-service.service';
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   globalData: Observable<any[]>;
-  constructor(public db: AngularFireDatabase) {
-    const prodid = this.getAll();
-    this.globalData  = prodid.snapshotChanges().pipe(map(changes => {
-      return changes.map(c => ({
-        key: c.payload.key, ...c.payload.val()
-       }));
-    }));
+  constructor(public db: AngularFireDatabase, private fireSrv: FirebaseService) {
+    this.globalData  = this.fireSrv.objectKey(this.getAll());
    }
 
   saveProduct(product) {

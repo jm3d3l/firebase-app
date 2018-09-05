@@ -12,6 +12,7 @@ import { AngularFireStorage } from 'angularfire2/storage';
 import {CustomFormsModule} from 'ng2-validation';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { Ng2Webstorage, LocalStorageService } from 'ngx-webstorage';
 @NgModule({
   imports: [
     BrowserModule,
@@ -19,10 +20,17 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     FormsModule,
     CustomFormsModule,
     NgxDatatableModule,
+     Ng2Webstorage,
     AngularFireModule.initializeApp(environment.firebase),
   ],
   declarations: [AppDeclaration],
-  providers: [AppProvider, AngularFireAuth, AngularFireDatabase, AngularFireStorage],
+  providers: [
+    AppProvider,
+    AngularFireAuth,
+    AngularFireDatabase,
+    AngularFireStorage,
+    LocalStorageService
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

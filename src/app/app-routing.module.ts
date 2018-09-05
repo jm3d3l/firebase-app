@@ -17,11 +17,13 @@ import { AdminGuard } from './admin-guard/admin.guard';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { PromptComponent } from './modal/prompt/prompt.component';
 import { BsModalService, ModalBackdropComponent } from 'ngx-bootstrap';
-import { ModalContainerComponent, ModalModule } from 'ngx-bootstrap/modal';
+import { ModalContainerComponent } from 'ngx-bootstrap/modal';
 import { BootstrapModule } from './bootstrap.module';
 import { CategoryService } from './services/category.service';
 import { ProductFilterComponent } from './pages/product/product-filter/product-filter.component';
 import { ProductCardComponent } from './pages/product-card/product-card.component';
+import { WindowRef } from './windowRef/window.provider';
+import { ProductQuantityComponent } from './pages/product-quantity/product-quantity.component';
 
 const routes: Routes = [
   {
@@ -39,7 +41,6 @@ const routes: Routes = [
   {
     path: 'shopping-cart',
     component: ShoppingCartComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: 'check-out',
@@ -90,7 +91,8 @@ const routes: Routes = [
   entryComponents: [
     ModalBackdropComponent,
     ModalContainerComponent
-],
+  ],
+
 
 
 })
@@ -114,7 +116,8 @@ export const AppDeclaration: any = [
   ModalContainerComponent,
   PromptComponent,
   ProductFilterComponent,
-  ProductCardComponent
+  ProductCardComponent,
+  ProductQuantityComponent
 ];
 
 export const AppProvider: any = [
@@ -122,6 +125,8 @@ export const AppProvider: any = [
   FirebaseService,
   BsModalService,
   AuthGuard,
-  AdminGuard
+  AdminGuard,
+
+  WindowRef
 ];
 
