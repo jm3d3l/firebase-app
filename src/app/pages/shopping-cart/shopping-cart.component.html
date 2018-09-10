@@ -17,14 +17,14 @@
           {{rock.product.title}}
         </td>
         <td>
-          {{rock.quantity}}
+          <app-product-quantity [product]="rock.product" [shopping-cart]="cart"></app-product-quantity>
         </td>
 
         <td>
-          {{rock.product.price | currency:'&#8369;'}}
+          {{rock.product.price | currency:'&#8369;' }}
         </td>
         <td>
-          {{rock.total}}
+          <b>&#8369;</b>{{rock.total | number:'1.2-2'}}
         </td>
       </tr>
     </tbody>
@@ -34,7 +34,7 @@
         <td></td>
         <td></td>
         <td>
-          <pre><b>{{cart.totalPrice}}</b></pre>
+          <pre><b>&#8369;{{cart.totalPrice | number:'1.2-2'}}</b></pre>
         </td>
       </tr>
 
