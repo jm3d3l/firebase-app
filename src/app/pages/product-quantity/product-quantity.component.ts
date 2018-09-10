@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { Product } from '../../models/product.model';
 import { ShoppingCart } from '../../models/shoppingCart';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-quantity',
@@ -11,12 +12,16 @@ import { ShoppingCart } from '../../models/shoppingCart';
 export class ProductQuantityComponent {
   @Input('product') product: Product;
   @Input('shopping-cart') shoppingCart: ShoppingCart;
-  constructor(private cartSrv: ShoppingCartService) { }
+  minus;
+  plus;
+  constructor(private cartSrv: ShoppingCartService, private router: Router) { }
 
   addToCart() {
     this.cartSrv.addToCart(this.product);
   }
   removeToCart() {
+    this.minus = (this.router.url === '/shopping-cart' ? 'circle' : 'square');
+    this.plus = (this.router.url === '/shopping-cart' ? 'circle' : 'square');
     this.cartSrv.removeToCart(this.product);
   }
 }
