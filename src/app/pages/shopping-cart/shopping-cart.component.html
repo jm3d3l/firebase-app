@@ -14,14 +14,14 @@
     <tbody *ngFor="let rock of cart.item">
       <tr>
         <td>
-          {{rock.product.title}}
+          {{rock.title}}
         </td>
         <td>
-          <app-product-quantity [product]="rock.product" [shopping-cart]="cart"></app-product-quantity>
+          <app-product-quantity [product]="rock" [shopping-cart]="cart"></app-product-quantity>
         </td>
 
         <td>
-          {{rock.product.price | currency:'&#8369;' }}
+          {{rock.price | currency:'&#8369;' }}
         </td>
         <td>
           <b>&#8369;</b>{{rock.total | number:'1.2-2'}}

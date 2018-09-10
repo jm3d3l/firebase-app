@@ -1,5 +1,6 @@
 import { ShoppingCartItem } from './shopping-cart-item';
 import { Product } from './product.model';
+import { timer } from 'rxjs';
 
 
 export class ShoppingCart {
@@ -9,7 +10,7 @@ export class ShoppingCart {
   constructor(public items: { [id: string]: ShoppingCartItem }) {
     for (let id in items) {
       let itemer = items[id];
-      this.item.push(new ShoppingCartItem(itemer.product, itemer.quantity));
+      this.item.push(new ShoppingCartItem({ ...itemer, key: id }));
     }
   }
 

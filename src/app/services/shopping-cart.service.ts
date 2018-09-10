@@ -24,10 +24,10 @@ export class ShoppingCartService {
     this.afDb.object('/shopping-cart/' + b + '/items').remove();
   }
   async addToCart(product: Product) {
-    this.updateItemQuantity(product, 1);
+    this.updateItem(product, 1);
   }
   async removeToCart(product: Product) {
-    this.updateItemQuantity(product, -1);
+    this.updateItem(product, -1);
   }
   private async getCart$(): Promise<AngularFireObject<ShoppingCart>> {
     const cartId = await this.getOrCreateCartId();
@@ -48,15 +48,39 @@ export class ShoppingCartService {
     localStorage.setItem('cartid', result.key);
     return result.key;
   }
-  private async updateItemQuantity(product: Product, change: number) {
+  private async updateItem(product: Product, change: number) {
     const cartid = await this.getOrCreateCartId();
     const item$ = this.getItem(cartid, product.key);
     item$.snapshotChanges().pipe(take(1)).subscribe(data => {
       let prod: any = {};
       const isProdExist = data.payload.exists();
       prod = data.payload.val();
-      if (isProdExist) item$.update({ quantity: prod.quantity + change });
-      else item$.set({ product: product, quantity: change });
+      if (isProdExist) {
+        item$.update({ quantity: prod.quantity + change });
+        let quantity = prod.quantity + change;
+        if (quantity === 0) item$.remove();
+      } else item$.update({
+        title: product.title,
+        imgurl: product.imgurl,
+        price: product.price,
+        quantity: change
+      });
     });
   }
+  // private async updateItem(product: Product, change: number) {
+  //   const cartid = await this.getOrCreateCartId();
+  //   const item$ = this.getItem(cartid, product.key);
+  //   item$.snapshotChanges().pipe(take(1)).subscribe(data => {
+  //     let prod: any = {};
+  //     const isProdExist = data.payload.exists();
+  //     prod = data.payload.val();
+  //     if (isProdExist) item$.update({ quantity: prod.quantity + change });
+  //     else item$.set({
+  //       title: product.title,
+  //       imgurl: product.imgurl,
+  //       price: product.price,
+  //       quantity: change
+  //     });
+  //   });
+  // }
 }
