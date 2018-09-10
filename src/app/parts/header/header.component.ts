@@ -34,6 +34,9 @@ export class HeaderComponent implements OnInit {
     this.auth.logout();
     this.router.navigate(['/']);
   }
+  clean() {
+    this.cartSrv.clearShoppingCart();
+  }
 
   async ngOnInit() {
     this.auth.appUser$.subscribe(user => this.appUser = user);

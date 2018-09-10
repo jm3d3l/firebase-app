@@ -18,7 +18,6 @@ export class ProductComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   filteredProduct: Product[] = [];
   subscription: Subscription;
-  scrollViewCount;
   category: string;
   cart: any;
   constructor(private productSrv: ProductService,

@@ -3,15 +3,18 @@ import { Product } from './product.model';
 
 
 export class ShoppingCart {
+
   item: ShoppingCartItem[] = [];
-  constructor(public items: { [prodid: string]: ShoppingCartItem }) {
-    for (let itemID in items) {
-      let itemer = items[itemID];
+
+  constructor(public items: { [id: string]: ShoppingCartItem }) {
+    for (let id in items) {
+      let itemer = items[id];
       this.item.push(new ShoppingCartItem(itemer.product, itemer.quantity));
     }
   }
 
   itemQuantity(product: Product) {
+    if (!this.items) return 0;
     let item = this.items[product.key];
     return item ? item.quantity : 0;
   }

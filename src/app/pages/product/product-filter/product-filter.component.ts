@@ -15,9 +15,8 @@ export class ProductFilterComponent implements OnInit {
     private CategorySrv: CategoryService,
     private cartSrv: ShoppingCartService,
   ) {
-     this.CategorySrv.globalCategories.subscribe(c => this.categories = c);
-   }
- async ngOnInit() {
+    this.CategorySrv.globalCategories.subscribe(c => this.categories = c);
   }
-
+  async ngOnInit() {
+  }
 }

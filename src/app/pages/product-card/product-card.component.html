@@ -8,8 +8,8 @@
     </div>
   </div>
   <div *ngIf="showActions && shoppingCart" class="card-footer">
-    <button *ngIf="shoppingCart.itemQuantity(product) === 0; else updateQuantity" (click)="addToCart()" class="btn btn-primary btn-block add-to-cart">Add
-      to Chart <i class="fas fa-cart-plus"></i></button>
+    <button *ngIf="shoppingCart.itemQuantity(product) === 0; else updateQuantity" (click)="addToCart()" class="btn btn-primary btn-block add-to-cart">
+      Add to Chart <i class="fas fa-cart-plus"></i></button>
     <ng-template #updateQuantity>
       <app-product-quantity [product]="product" [shopping-cart]="shoppingCart"></app-product-quantity>
     </ng-template>
