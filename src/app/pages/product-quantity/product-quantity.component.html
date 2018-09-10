@@ -1,14 +1,15 @@
 <div class="row no-gutters">
   <div class="col-2">
-    <button (click)="removeToCart()" class="btn btn-button btn-block btn-hover">
-      <i [ngClass]="{'far fa-minus-circle':router.url === 'shopping-cart',
-        'far fa-minus-square':router.url === '/'}"></i></button>
+    <button (click)="removeToCart()" class="btn btn-hover" [ngClass]="{'icon-circle':!minus, 'btn-no-shadow':!minus}">
+      <i [ngClass]="minus ? 'fa fa-minus-square' : 'fa fa-minus-circle'"></i>
+    </button>
   </div>
   <div class="col quantity">
     <div> {{shoppingCart.itemQuantity(product)}} in cart</div>
   </div>
   <div class="col-2">
-    <button (click)="addToCart()" class="btn btn-button"><i class="far fa-plus-{{plus}}"></i></button>
+    <button (click)="addToCart()" class="btn btn-hover" [ngClass]="{'icon-circle':!minus, 'btn-no-shadow':!minus}">
+      <i [ngClass]="plus ? 'fa fa-plus-square' : 'fa fa-plus-circle'"></i>
+    </button>
   </div>
 </div>
-<!-- class="far fa-minus-{{minus}}] -->

@@ -4,38 +4,43 @@
   <table class="table table-light">
     <thead class="thead-light">
       <tr>
+        <th>Image</th>
         <th>Title</th>
-        <th>quantity</th>
-        <th>price</th>
-        <th>total</th>
+        <th class="text-center">quantity</th>
+        <th class="text-right">price</th>
+        <th class="text-right">total</th>
       </tr>
     </thead>
 
     <tbody *ngFor="let rock of cart.item">
       <tr>
         <td>
+          <div [style.backgroundImage]="'url('+rock.imgurl+')'" class="thumbnail"></div>
+        </td>
+        <td class="align-middle">
           {{rock.title}}
         </td>
-        <td>
+        <td class="align-middle">
           <app-product-quantity [product]="rock" [shopping-cart]="cart"></app-product-quantity>
         </td>
 
-        <td>
+        <td class="align-middle text-right">
           {{rock.price | currency:'&#8369;' }}
         </td>
-        <td>
+        <td class="align-middle text-right">
           <b>&#8369;</b>{{rock.total | number:'1.2-2'}}
         </td>
       </tr>
     </tbody>
     <tfoot>
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>
           <pre><b>&#8369;{{cart.totalPrice | number:'1.2-2'}}</b></pre>
-        </td>
+        </th>
       </tr>
 
     </tfoot>

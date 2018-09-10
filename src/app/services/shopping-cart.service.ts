@@ -11,13 +11,10 @@ import { Observable } from 'rxjs';
 export class ShoppingCartService {
   itemCount;
 
-  constructor(private afDb: AngularFireDatabase) {
-
-  }
+  constructor(private afDb: AngularFireDatabase) { }
   async getCart(): Promise<Observable<ShoppingCart>> {
     let cartItem = await this.getCart$();
     return cartItem.valueChanges().pipe(map(x => new ShoppingCart(x.items)));
-
   }
   async clearShoppingCart() {
     let b = await this.getOrCreateCartId();
@@ -51,36 +48,24 @@ export class ShoppingCartService {
   private async updateItem(product: Product, change: number) {
     const cartid = await this.getOrCreateCartId();
     const item$ = this.getItem(cartid, product.key);
-    item$.snapshotChanges().pipe(take(1)).subscribe(data => {
-      let prod: any = {};
-      const isProdExist = data.payload.exists();
-      prod = data.payload.val();
-      if (isProdExist) {
-        item$.update({ quantity: prod.quantity + change });
-        let quantity = prod.quantity + change;
-        if (quantity === 0) item$.remove();
-      } else item$.update({
-        title: product.title,
-        imgurl: product.imgurl,
-        price: product.price,
-        quantity: change
+    item$
+      .snapshotChanges()
+      .pipe(take(1))
+      .subscribe(data => {
+        let prod: any = {};
+        const isProdExist = data.payload.exists();
+        prod = data.payload.val();
+        if (isProdExist) {
+          item$.update({ quantity: prod.quantity + change });
+          let quantity = prod.quantity + change;
+          if (quantity === 0) item$.remove();
+        } else
+          item$.update({
+            title: product.title,
+            imgurl: product.imgurl,
+            price: product.price,
+            quantity: change
+          });
       });
-    });
   }
-  // private async updateItem(product: Product, change: number) {
-  //   const cartid = await this.getOrCreateCartId();
-  //   const item$ = this.getItem(cartid, product.key);
-  //   item$.snapshotChanges().pipe(take(1)).subscribe(data => {
-  //     let prod: any = {};
-  //     const isProdExist = data.payload.exists();
-  //     prod = data.payload.val();
-  //     if (isProdExist) item$.update({ quantity: prod.quantity + change });
-  //     else item$.set({
-  //       title: product.title,
-  //       imgurl: product.imgurl,
-  //       price: product.price,
-  //       quantity: change
-  //     });
-  //   });
-  // }
 }
