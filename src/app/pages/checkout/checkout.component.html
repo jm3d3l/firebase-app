@@ -1,16 +1,31 @@
-<ng-container *ngIf="cart$ | async as cart">
-  <div>
-    <ul class="list-group">
-      <li class="list-group-item">
-        <div class="row" *ngFor="let b of cart.item">
-          <div class="col-md-8">{{cart.itemQuantity(b)}} <b>x</b> {{b.title}}</div>
-          <div class="col-md-4">&#8369;{{b.price | number:'1.2-2'}}</div>
-        </div>
-      </li>
-    </ul>
+<ng-container>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Shipping</h4>
+  </div>
+  <div class="modal-body">
     <div class="row">
-      <div class="col-md-8 text-right">Total Price:</div>
-      <div class="col-md-4">{{cart.totalPrice}}</div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col">
+            <form #f="ngForm">
+              <div class="form-group">
+                <input #fname="ngModel" [(ngModel)]="shipping.fname" name="firstName" id="firstName" class="form-control"
+                  placeholder="First Name">
+              </div>
+              <div class="form-group">
+                <input #lname="ngModel" [(ngModel)]="shipping.lname" name="lastName" id="lastName" class="form-control"
+                  placeholder="Last Name">
+              </div>
+              <div class="from-group">
+                <input #address="ngModel" [(ngModel)]="shipping.address" name="address" id="address" placeholder="address"
+                  class="form-control">
+              </div>
+
+              <button class="btn btn-primary" (click)="save()">save</button>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </ng-container>

@@ -11,4 +11,7 @@ export class LoginComponent {
 
   constructor(private auth: FirebaseService, private router: Router, private route: ActivatedRoute) { }
 
+  login() {
+    this.auth.login();
+  }
 }
