@@ -90,7 +90,8 @@ const routes: Routes = [
   ],
   entryComponents: [
     ModalBackdropComponent,
-    ModalContainerComponent
+    ModalContainerComponent,
+    CheckoutComponent
   ],
 
 

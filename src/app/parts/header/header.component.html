@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary navbar-fixed sticky-top">
   <div class="container">
 
-    <a class="navbar-brand" routerLink="/">Navbar</a>
+    <a class="navbar-brand" routerLink="/" [class.active]="router.url === '/'">Navbar</a>
     <button (click)="isCollapsed = !isCollapsed" class="navbar-toggler" type="button" data-toggle="collapse"
       data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -9,11 +9,12 @@
     <div class="collapse navbar-collapse" [collapse]="isCollapsed" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/shopping-cart">
+          <a class="nav-link" [class.active]="router.url === '/shopping-cart'" routerLink="/shopping-cart">
 
-            <span class="badge badge-warning badge-pill" *ngIf="cart$ | async as cart">{{ cart.cartCount }} </span>
-            Shopping Cart <span class="sr-only">(current)
+            Shopping Cart <span class="badge badge-warning badge-pill" *ngIf="cart$ | async as cart">
+              {{ cart.cartCount }}
             </span>
+            <span class="sr-only">(current)</span>
           </a>
         </li>
         <ng-template #unkwownUser>

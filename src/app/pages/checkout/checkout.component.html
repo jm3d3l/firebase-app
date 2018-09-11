@@ -1,3 +1,16 @@
-<p>
-  checkout works!
-</p>
+<ng-container *ngIf="cart$ | async as cart">
+  <div>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <div class="row" *ngFor="let b of cart.item">
+          <div class="col-md-8">{{cart.itemQuantity(b)}} <b>x</b> {{b.title}}</div>
+          <div class="col-md-4">&#8369;{{b.price | number:'1.2-2'}}</div>
+        </div>
+      </li>
+    </ul>
+    <div class="row">
+      <div class="col-md-8 text-right">Total Price:</div>
+      <div class="col-md-4">{{cart.totalPrice}}</div>
+    </div>
+  </div>
+</ng-container>
