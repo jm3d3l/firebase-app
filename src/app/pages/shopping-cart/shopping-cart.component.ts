@@ -34,6 +34,9 @@ export class ShoppingCartComponent implements OnInit {
     this.router.navigateByUrl('/check-out');
     if (!user) this.modalRef = this.modal.show(CheckoutComponent, Object.assign({}, { class: 'gray modal-lg' }));
   }
+  clean() {
+    this.ShopSrv.clearShoppingCart();
+  }
   async ngOnInit() {
     this.cart$ = (await this.ShopSrv.getCart());
     this.cart$.subscribe(data => {

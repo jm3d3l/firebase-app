@@ -16,7 +16,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     cart: ShoppingCart;
     subscription: Subscription;
 
-    userId: string;
     constructor(
         private CartSrv: ShoppingCartService,
         private orderSrv: OrderService,
@@ -24,7 +23,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     modalRef: BsModalRef;
     save() {
         let order = {
-            // userId: this.userId,
             datePlaced: new Date().getTime(),
             shipping: this.shipping,
             items: this.cart.item.map(x => {
@@ -44,7 +42,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     async ngOnInit() {
         let cart$ = (await this.CartSrv.getCart());
         this.subscription = cart$.subscribe(data => this.cart = data);
-        // this.authSrv.user$.subscribe(user => console.log('user uid', user.uid));
+
     }
     ngOnDestroy() {
         this.subscription.unsubscribe();

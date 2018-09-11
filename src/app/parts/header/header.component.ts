@@ -24,7 +24,6 @@ export class HeaderComponent implements OnInit {
     private storage: LocalStorageService,
     private cartSrv: ShoppingCartService) {
   }
-
   login() {
     const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
     this.storage.store('returnUrl', returnUrl);
@@ -33,9 +32,6 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.auth.logout();
     this.router.navigate(['/']);
-  }
-  clean() {
-    this.cartSrv.clearShoppingCart();
   }
 
   async ngOnInit() {
