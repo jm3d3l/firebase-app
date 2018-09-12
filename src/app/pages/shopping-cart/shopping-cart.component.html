@@ -1,55 +1,69 @@
 <ng-container *ngIf="cart$ | async as cart">
-  <h2>You have <small>{{cart.cartCount}}</small> items in your Cart</h2>
+  <ng-template *ngIf="cart.cartCount;then orderItem else noItem"></ng-template>
+  <ng-template #orderItem>
+    <h4>Shopping Cart</h4>
+    <p>You have <b>{{cart.cartCount}}</b> items in your cart. <span (click)="clean()" class="font-style-italic clear-cart">clear
+        cart</span></p>
 
-  <table class="table table-light">
-    <thead class="thead-light">
-      <tr>
-        <th>Image</th>
-        <th>Title</th>
-        <th class="text-center">Quantity</th>
-        <th class="text-right">Price</th>
+    <table class="table table-light">
+      <thead class="thead-light">
+        <tr>
+          <th>Image</th>
+          <th>Title</th>
+          <th class="text-center">Quantity</th>
+          <th class="text-right">Price</th>
 
-      </tr>
-    </thead>
+        </tr>
+      </thead>
 
-    <tbody *ngFor="let rock of cart.item">
-      <tr>
-        <td>
-          <div [style.backgroundImage]="'url('+rock.imgurl+')'" class="thumbnail"></div>
-        </td>
-        <td class="align-middle">
-          {{rock.title}}
-        </td>
-        <td class="align-middle">
-          <app-product-quantity [product]="rock" [shopping-cart]="cart"></app-product-quantity>
-        </td>
+      <tbody *ngFor="let rock of cart.item  | paginate: { itemsPerPage: 4, currentPage: p }">
+        <tr>
+          <td>
+            <div [style.backgroundImage]="'url('+rock.imgurl+')'" class="thumbnail"></div>
+          </td>
+          <td class="align-middle">
+            {{rock.title}}
+          </td>
+          <td class="align-middle">
+            <app-product-quantity [product]="rock" [shopping-cart]="cart"></app-product-quantity>
+          </td>
 
-        <td class="align-middle text-right">
-          {{rock.price | currency:'&#8369;' }}
-        </td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <th></th>
-        <th></th>
-        <th class="text-right"> total</th>
-        <th class="text-right">
-          <pre><b>&#8369;{{cart.totalPrice | number:'1.2-2'}}</b></pre>
-        </th>
-      </tr>
+          <td class="align-middle text-right">
+            {{rock.price | currency:'&#8369;' }}
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th></th>
+          <th></th>
+          <th class="text-right"> total</th>
+          <th class="text-right">
+            <pre><b>&#8369;{{cart.totalPrice | number:'1.2-2'}}</b></pre>
+          </th>
+        </tr>
 
-    </tfoot>
-  </table>
-  <div class="row">
-    <div class="col"></div>
-    <div class="col-md-4">
-      <div class="row mt-3">
-        <div class="col d-flex justify-content-end">
-          <button (click)="clean()" class="btn btn-warning btn-sm">Clear</button>
-          <button class="btn btn-primary btn-sm ml-4" (click)="checkouts()">Checkout</button>
+      </tfoot>
+    </table>
+
+    <div class="row" *ngIf="cart.cartCount">
+      <div class="col"></div>
+      <div class="col-md-4">
+        <div class="row mt-3">
+          <div class="col d-flex justify-content-end flex-row">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            <button class="btn btn-primary btn-sm ml-4" (click)="checkouts()">Checkout</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </ng-template>
+
+  <ng-template #noItem>
+    <div class="container d-flex justify-content-center flex-column mt-4">
+      <h4 class="font-weight-bold text-center">your cart is empty</h4>
+      <button class="btn btn-primary mt-4">Continue Shopping</button>
+    </div>
+
+  </ng-template>
 </ng-container>

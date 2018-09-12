@@ -4,7 +4,7 @@
     <h5 class="card-title mb-1">{{product.title}}</h5>
     <p class="card-text mb-1">{{product.price | currency:'&#8369;'}}</p>
     <div class="credits">
-      <small> <b>credits to the owner:</b>{{product.credits}}</small>
+      <small> <b>credits:</b>{{product.credits}}</small>
     </div>
   </div>
   <div *ngIf="showActions && shoppingCart" class="card-footer">

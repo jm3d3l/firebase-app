@@ -9,10 +9,11 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { FormsModule } from '@angular/forms';
 import { AngularFireStorage } from 'angularfire2/storage';
-import {CustomFormsModule} from 'ng2-validation';
+import { CustomFormsModule } from 'ng2-validation';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { Ng2Webstorage, LocalStorageService } from 'ngx-webstorage';
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   imports: [
     BrowserModule,
@@ -20,7 +21,8 @@ import { Ng2Webstorage, LocalStorageService } from 'ngx-webstorage';
     FormsModule,
     CustomFormsModule,
     NgxDatatableModule,
-     Ng2Webstorage,
+    NgxPaginationModule,
+    Ng2Webstorage,
     AngularFireModule.initializeApp(environment.firebase),
   ],
   declarations: [AppDeclaration],
