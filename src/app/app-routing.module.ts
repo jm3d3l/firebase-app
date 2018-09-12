@@ -24,6 +24,7 @@ import { ProductFilterComponent } from './pages/product/product-filter/product-f
 import { ProductCardComponent } from './pages/product-card/product-card.component';
 import { WindowRef } from './windowRef/window.provider';
 import { ProductQuantityComponent } from './pages/product-quantity/product-quantity.component';
+import { OrderSummaryComponent } from './pages/my-order/order-summary/order-summary.component';
 
 const routes: Routes = [
   {
@@ -48,7 +49,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'order-success',
+    path: 'order-success/:id',
     component: OrderSuccessComponent,
     canActivate: [AuthGuard]
   },
@@ -96,6 +97,7 @@ const routes: Routes = [
 
 
 
+
 })
 export class AppRoutingModule { }
 
@@ -118,7 +120,8 @@ export const AppDeclaration: any = [
   PromptComponent,
   ProductFilterComponent,
   ProductCardComponent,
-  ProductQuantityComponent
+  ProductQuantityComponent,
+  OrderSummaryComponent
 ];
 
 export const AppProvider: any = [

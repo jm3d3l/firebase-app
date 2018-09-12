@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Placed oder</h4>
+    <p class="card-text">you are pogi</p>
+    <ul class="list-group list-group-flush">
+      <li *ngFor="let b of cart.item" class="list-group-item">
+        {{cart.itemQuantity(b)}} <b>x</b> {{b.title}}
+        <div class="float-right">&#8369;{{b.price | number:'1.2-2'}}</div>
+      </li>
+      <li class="list-group-item font-weight-bold">
+        total
+        <div class="float-right">
+          <th>{{cart.totalPrice}}</th>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

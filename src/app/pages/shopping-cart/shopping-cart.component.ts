@@ -39,10 +39,10 @@ export class ShoppingCartComponent implements OnInit {
   }
   async ngOnInit() {
     this.cart$ = (await this.ShopSrv.getCart());
-    this.cart$.subscribe(data => {
-      if (data.cartCount === 0)
-        this.router.navigate(['/']);
-    });
+    // this.cart$.subscribe(data => {
+    //   if (data.cartCount === 0)
+    //     this.router.navigate(['/']);
+    // });
   }
 
 }

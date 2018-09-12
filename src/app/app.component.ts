@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   returnURl;
   constructor(
     private auth: FirebaseService,
-    private router: Router,
+    public router: Router,
     private route: ActivatedRoute,
     private storage: LocalStorageService,
     private user: UserService) {

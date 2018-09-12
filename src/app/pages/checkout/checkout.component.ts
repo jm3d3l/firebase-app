@@ -5,6 +5,8 @@ import { ShoppingCart } from '../../models/shoppingCart';
 import { Subscription } from 'rxjs';
 import { OrderService } from '../../services/order.service';
 import { FirebaseService } from '../../services/firebase-service.service';
+import { Order } from '../../models/order.model';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-checkout',
@@ -14,38 +16,30 @@ import { FirebaseService } from '../../services/firebase-service.service';
 export class CheckoutComponent implements OnInit, OnDestroy {
     shipping: any = {};
     cart: ShoppingCart;
-    subscription: Subscription;
+    cartSubscription: Subscription;
+    orderSubscription: Subscription;
+    userId: string;
 
     constructor(
+        private router: Router,
         private CartSrv: ShoppingCartService,
         private orderSrv: OrderService,
         private authSrv: FirebaseService) { }
     modalRef: BsModalRef;
-    save() {
-        let order = {
-            datePlaced: new Date().getTime(),
-            shipping: this.shipping,
-            items: this.cart.item.map(x => {
-                return {
-                    product: {
-                        title: x.title,
-                        imgurl: x.imgurl,
-                        price: x.price
-                    },
-                    quantity: x.quantity,
-                    totalPrice: x.total
-                };
-            })
-        };
-        this.orderSrv.addOrder(order);
+    async save() {
+        let order = new Order(this.userId, this.shipping, this.cart);
+        let result = this.orderSrv.placedOrder(order);
+        this.router.navigate(['/order-success/', result.key]);
     }
     async ngOnInit() {
         let cart$ = (await this.CartSrv.getCart());
-        this.subscription = cart$.subscribe(data => this.cart = data);
+        this.cartSubscription = cart$.subscribe(data => this.cart = data);
+        this.orderSubscription = this.authSrv.user$.subscribe(b => this.userId = b.uid);
 
     }
     ngOnDestroy() {
-        this.subscription.unsubscribe();
+        this.cartSubscription.unsubscribe();
+        this.orderSubscription.unsubscribe();
     }
 
 }
