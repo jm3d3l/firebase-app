@@ -14,10 +14,13 @@ import { CustomFormsModule } from 'ng2-validation';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { Ng2Webstorage, LocalStorageService } from 'ngx-webstorage';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   imports: [
     BrowserModule,
     AppRoutingModule,
+    // BrowserAnimationsModule,
+    // NoopAnimationsModule,
     FormsModule,
     CustomFormsModule,
     NgxDatatableModule,

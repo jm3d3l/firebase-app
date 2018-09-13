@@ -25,6 +25,7 @@ import { ProductCardComponent } from './pages/product-card/product-card.componen
 import { WindowRef } from './windowRef/window.provider';
 import { ProductQuantityComponent } from './pages/product-quantity/product-quantity.component';
 import { OrderSummaryComponent } from './pages/my-order/order-summary/order-summary.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   {
@@ -84,6 +85,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     BootstrapModule,
+    BrowserAnimationsModule
   ],
   exports: [
     RouterModule,

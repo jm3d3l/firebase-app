@@ -4,9 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../models/product.model';
 import { switchMap } from 'rxjs/operators';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
-import { Subscription, Observable } from 'rxjs';
-import { WindowRef } from '../../windowRef/window.provider';
-import { ShoppingCart } from '../../models/shoppingCart';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product',

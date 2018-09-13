@@ -14,12 +14,14 @@ import { Router } from '@angular/router';
     styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit, OnDestroy {
-    shipping: any = {};
+    shipping: any = {
+        name: '',
+    };
     cart: ShoppingCart;
     cartSubscription: Subscription;
     orderSubscription: Subscription;
     userId: string;
-
+    username: string;
     constructor(
         private router: Router,
         private CartSrv: ShoppingCartService,
@@ -34,7 +36,10 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     async ngOnInit() {
         let cart$ = (await this.CartSrv.getCart());
         this.cartSubscription = cart$.subscribe(data => this.cart = data);
-        this.orderSubscription = this.authSrv.user$.subscribe(b => this.userId = b.uid);
+        this.orderSubscription = this.authSrv.user$.subscribe(b => {
+            this.userId = b.uid;
+            this.shipping.name = b.displayName;
+        });
 
     }
     ngOnDestroy() {

@@ -9,7 +9,7 @@ import { LocalStorageService } from 'ngx-webstorage';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  googleLogo = 'http://www.iosicongallery.com/icons/google-2015-10-22/512.png';
+  googleLogo = 'assets/googleicon.png';
   constructor(
     private auth: FirebaseService,
     private router: Router,

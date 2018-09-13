@@ -9,14 +9,9 @@
           <div class="col">
             <form #f="ngForm" class="d-flex justify-content-center flex-column">
               <div class="form-group">
-                <input #fname="ngModel" [(ngModel)]="shipping.fname" name="firstName" id="firstName" class="form-control"
+                <input #fname="ngModel" [(ngModel)]="shipping.name" name="firstName" id="firstName" class="form-control"
                   placeholder="First Name" required>
                 <div class="alert alert-danger" role="alert" *ngIf="fname.touched && fname.invalid"> invalid state</div>
-              </div>
-              <div class="form-group">
-                <input name="lastName" id="lastName" class="form-control" placeholder="Last Name" #lname="ngModel"
-                  [(ngModel)]="shipping.lname" required>
-                <div class="alert alert-danger" role="alert" *ngIf="lname.touched && lname.invalid"> invalid state</div>
               </div>
               <div class="from-group">
                 <input #address="ngModel" [(ngModel)]="shipping.address" name="address" id="address" placeholder="address"
