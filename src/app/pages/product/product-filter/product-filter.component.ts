@@ -1,22 +1,27 @@
-import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { Component, OnInit, Input, HostListener, OnDestroy } from '@angular/core';
 import { CategoryService } from '../../../services/category.service';
-import { ShoppingCartService } from '../../../services/shopping-cart.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-filter',
   templateUrl: './product-filter.component.html',
   styleUrls: ['./product-filter.component.scss']
 })
-export class ProductFilterComponent implements OnInit {
+export class ProductFilterComponent implements OnInit, OnDestroy {
   @Input('category') category;
+  screenWidth: number;
   categories;
-
-  constructor(
-    private CategorySrv: CategoryService,
-    private cartSrv: ShoppingCartService,
-  ) {
-    this.CategorySrv.globalCategories.subscribe(c => this.categories = c);
-  }
+  medium: boolean;
+  subcription: Subscription;
+@HostListener('window:resize', ['$event']) onResize(event?) {
+  this.screenWidth = window.innerWidth;
+  this.medium = (this.screenWidth > 768 ? true : false);
+}
+  constructor( private CategorySrv: CategoryService ) { }
   async ngOnInit() {
+    this.subcription = this.CategorySrv.globalCategories.subscribe(c => this.categories = c );
+  }
+  ngOnDestroy() {
+    this.subcription.unsubscribe();
   }
 }

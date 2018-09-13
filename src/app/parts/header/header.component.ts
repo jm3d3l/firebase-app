@@ -4,9 +4,7 @@ import { FirebaseService } from '../../services/firebase-service.service';
 import { UserModel } from '../../models/user-model';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
-import { ShoppingCart } from '../../models/shoppingCart';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule, AppDeclaration, AppProvider } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularFireModule } from 'angularfire2';
@@ -14,13 +13,11 @@ import { CustomFormsModule } from 'ng2-validation';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { Ng2Webstorage, LocalStorageService } from 'ngx-webstorage';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   imports: [
     BrowserModule,
     AppRoutingModule,
-    // BrowserAnimationsModule,
-    // NoopAnimationsModule,
     FormsModule,
     CustomFormsModule,
     NgxDatatableModule,
@@ -39,3 +36,4 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
   bootstrap: [AppComponent],
 })
 export class AppModule { }
+  

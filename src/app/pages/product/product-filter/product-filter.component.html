@@ -1,8 +1,23 @@
 <div class="sticky-top">
-  <div class="list-group">
-    <a *ngIf="categories" routerLink="/" class="list-group-item list-group-item-action" [class.active]="!category">All
-      Product</a>
-    <a *ngFor="let c of categories" routerLink="/" [queryParams]="{category:c.name}" class="list-group-item"
-      [class.active]="category === c.name">{{c.name}}</a>
-  </div>
+  <ng-template *ngIf="medium;then large else small"></ng-template>
+  <ng-template #large>
+    <div class="list-group">
+      <a *ngIf="categories" routerLink="/" class="list-group-item list-group-item-action" [class.active]="!category">All
+        Product</a>
+      <a *ngFor="let c of categories" routerLink="/" [queryParams]="{category:c.name}" class="list-group-item"
+        [class.active]="category === c.name">{{c.name}}</a>
+    </div>
+  </ng-template>
+  <ng-template #small>
+    <div class="btn-toolbar mystick-bottom">
+      <div class="btn-group">
+        <button class="btn-outline-primary btn-sm" routerLink="/">All Product</button>
+        <button 
+        *ngFor="let c of categories" 
+        class="btn-outline-primary btn-sm"
+         routerLink="/"
+         [queryParams]="{category: c.name}">{{c.name}}</button>
+      </div>
+    </div>
+  </ng-template>
 </div>

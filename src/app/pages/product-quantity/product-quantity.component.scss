@@ -2,8 +2,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  min-width: 132px;
 }
-
+@media device and(min-width:786px) {
+  
+}
 .btn {
   border-radius: 0;
 }

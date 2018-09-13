@@ -25,7 +25,7 @@ import { ProductCardComponent } from './pages/product-card/product-card.componen
 import { WindowRef } from './windowRef/window.provider';
 import { ProductQuantityComponent } from './pages/product-quantity/product-quantity.component';
 import { OrderSummaryComponent } from './pages/my-order/order-summary/order-summary.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BreakpointsDirective } from './custom-directives/breakpoints.directive';
 
 const routes: Routes = [
   {
@@ -85,7 +85,6 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     BootstrapModule,
-    BrowserAnimationsModule
   ],
   exports: [
     RouterModule,
@@ -96,6 +95,7 @@ const routes: Routes = [
     ModalContainerComponent,
     CheckoutComponent
   ],
+
 
 
 
@@ -123,7 +123,8 @@ export const AppDeclaration: any = [
   ProductFilterComponent,
   ProductCardComponent,
   ProductQuantityComponent,
-  OrderSummaryComponent
+  OrderSummaryComponent,
+  BreakpointsDirective
 ];
 
 export const AppProvider: any = [

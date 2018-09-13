@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy, HostListener, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../models/product.model';
 import { switchMap } from 'rxjs/operators';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { Subscription } from 'rxjs';
+import { WindowRef } from '../../windowRef/window.provider';
 
 @Component({
   selector: 'app-product',
@@ -18,10 +19,13 @@ export class ProductComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   category: string;
   cart: any;
+  window: WindowRef;
+
   constructor(private productSrv: ProductService,
     private route: ActivatedRoute,
     private cartSrv: ShoppingCartService) {
   }
+ 
   private filteredProducts(): void {
     this.filteredProduct = (this.category) ?
       this.products.filter(prod => prod.category === this.category) :
