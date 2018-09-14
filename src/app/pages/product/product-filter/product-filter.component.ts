@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, HostListener, OnDestroy } from '@angular/core';
 import { CategoryService } from '../../../services/category.service';
 import { Subscription } from 'rxjs';
+import { BehaviorSubjectService } from '../../../services/behavior-subject.service';
 
 @Component({
   selector: 'app-product-filter',
@@ -13,13 +14,12 @@ export class ProductFilterComponent implements OnInit, OnDestroy {
   categories;
   medium: boolean;
   subcription: Subscription;
-@HostListener('window:resize', ['$event']) onResize(event?) {
-  this.screenWidth = window.innerWidth;
-  this.medium = (this.screenWidth > 768 ? true : false);
-}
-  constructor( private CategorySrv: CategoryService ) { }
-  async ngOnInit() {
+  subSubcription: Subscription;
+
+  constructor( private CategorySrv: CategoryService, private subSrv: BehaviorSubjectService ) { }
+   ngOnInit() {
     this.subcription = this.CategorySrv.globalCategories.subscribe(c => this.categories = c );
+
   }
   ngOnDestroy() {
     this.subcription.unsubscribe();

@@ -90,15 +90,6 @@ const routes: Routes = [
     RouterModule,
     BootstrapModule
   ],
-  entryComponents: [
-    ModalBackdropComponent,
-    ModalContainerComponent,
-    CheckoutComponent
-  ],
-
-
-
-
 
 })
 export class AppRoutingModule { }
@@ -133,7 +124,11 @@ export const AppProvider: any = [
   BsModalService,
   AuthGuard,
   AdminGuard,
-
   WindowRef
 ];
 
+export const appEntry: any = [
+  ModalBackdropComponent,
+    ModalContainerComponent,
+    CheckoutComponent
+];

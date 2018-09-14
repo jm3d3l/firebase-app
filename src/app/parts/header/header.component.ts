@@ -11,7 +11,7 @@ import { ShoppingCartService } from '../../services/shopping-cart.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  isCollapsed = false;
+  isCollapsed = true;
   appUser: UserModel;
   cartCount: number;
   cart$;

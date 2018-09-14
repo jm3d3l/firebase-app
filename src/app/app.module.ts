@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppRoutingModule, AppDeclaration, AppProvider } from './app-routing.module';
+import { AppRoutingModule, AppDeclaration, AppProvider, appEntry } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
@@ -26,6 +26,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AngularFireModule.initializeApp(environment.firebase),
   ],
   declarations: [AppDeclaration],
+  entryComponents: [appEntry],
   providers: [
     AppProvider,
     AngularFireAuth,
@@ -36,4 +37,3 @@ import { NgxPaginationModule } from 'ngx-pagination';
   bootstrap: [AppComponent],
 })
 export class AppModule { }
-  
